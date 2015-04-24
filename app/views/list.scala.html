@@ -1,0 +1,73 @@
+@(currentPage: Page[(Project, Option[Person])], currentOrderBy: Int, currentFilter: String)(implicit flash: play.api.mvc.Flash)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage: Int, newOrderBy: Option[Int] = None) = @{
+    routes.Application.list(newPage, newOrderBy.map { orderBy =>
+        if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
+    }.getOrElse(currentOrderBy), currentFilter)
+    
+}
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(orderBy: Int, title: String) = {
+<th class="col@orderBy header @if(scala.math.abs(currentOrderBy) == orderBy) @{if(currentOrderBy < 0) "headerSortDown" else "headerSortUp"}">
+<a href="@link(0, Some(orderBy))">@title</a>
+</th>
+}
+
+@main {
+
+    <h1>@Messages("projects.list.title", currentPage.total) </h1>
+
+    @flash.get("success").map { message =>
+    <div class="alert-message warning">
+        <strong>Done!</strong> @message
+    </div>
+    }
+
+    @Option(currentPage.items).filterNot(_.isEmpty).map { projects =>
+
+    <table class="projects zebra-striped">
+        <thead>
+        <tr>
+            @header(1, "project name")
+            @header(2, "person")
+            @header(3, "email")
+        </tr>
+        </thead>
+        <tbody>
+
+        @projects.map {
+        case (project, person) => {
+        <tr>
+            <td>@project.name</td>
+            <td>
+                @person.map(_.first_name).getOrElse { <em>-</em> } @person.map(_.last_name).getOrElse { <em>-</em> }
+            </td>
+
+            <td>
+                @person.map(_.email).getOrElse { <em>-</em> }
+            </td>
+        </tr>
+        }
+        }
+
+        </tbody>
+    </table>
+
+
+
+    }.getOrElse {
+
+    <div class="well">
+        <em>Nothing to display</em>
+    </div>
+
+    }
+        
+}
+
+            

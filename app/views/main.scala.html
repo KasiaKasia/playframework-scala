@@ -1,0 +1,26 @@
+@(content: Html)
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")"/>         
+        
+    </head>
+    <body>
+        
+        <header class="topbar">
+            <h1 class="fill">
+                <a href="@routes.Application.index()">
+                    Play framework 2.3.8 - Scala 2.11.4
+                </a>
+            </h1>
+        </header>
+        
+        <section id="main">
+            @content
+        </section>
+        
+    </body>
+</html>

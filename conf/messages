@@ -1,0 +1,2 @@
+# Messages
+projects.list.title={0,choice,0#No projects|1#One project|1<{0,number,integer} projects} found

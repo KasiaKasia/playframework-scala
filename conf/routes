@@ -1,0 +1,6 @@
+
+GET     /                           controllers.Application.index
+GET     /projects                   controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f ?= "")
+
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
