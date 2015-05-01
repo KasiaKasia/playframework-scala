@@ -11,6 +11,8 @@ create table person (
   last_name     varchar(255) not null,
   website       varchar(255) not null,
   email         varchar(255) not null,
+  is_active     BOOLEAN,
+  date_joined timestamp,
   constraint pk_person primary key (id))
 ;
 

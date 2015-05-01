@@ -1,14 +1,10 @@
-New log file opened at Sat Apr 25 00:40:38 CEST 2015 by 12120@Kasia
-Taking next connection to: 61274
-New client attempting to connect on port: 61275-61274
-  Address = /192.168.0.108:61274
-This client on port 61275 has uuid bd9dad15-3732-4cac-a677-8375518e7e49 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-bd9dad15-3732-4cac-a677-8375518e7e49
-Taking next connection to: 61274
+New log file opened at Fri May 01 04:21:49 CEST 2015 by 9944@Kasia
+Taking next connection to: 54339
+New client attempting to connect on port: 54340-54339
+  Address = /192.168.0.107:54339
+This client on port 54340 has uuid 58c2b7fc-ad50-476a-ab17-8929cc3d5bce configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-58c2b7fc-ad50-476a-ab17-8929cc3d5bce
+Taking next connection to: 54339
 Checking to see if clients are empty...
-No non-daemon clients connected after 3 min. Shutting down.
-1 daemon clients are connected.
-Server socket thread exiting.
-1 clients open, will close them...
-All client sockets have been closed.
-Closing the 12120@Kasia logs at Sat Apr 25 00:43:40 CEST 2015, goodbye.
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 54339

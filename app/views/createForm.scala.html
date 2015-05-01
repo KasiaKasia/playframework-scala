@@ -1,0 +1,42 @@
+@(personForm: Form[Person],  person: Seq[(String, String)])
+
+@import helper._
+
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+@main {
+
+    <h1>Add a Person</h1>
+
+
+    @form(routes.Application.save()) {
+
+    <fieldset>
+
+        @inputText(personForm("first_name"), '_label -> "Person first name  ", '_help -> "")
+        @inputText(personForm("last_name"), '_label -> "Person name  ", '_help -> "")
+        @inputText(personForm("website"), '_label -> "  website  ", '_help -> "")
+        @inputText(personForm("email"), '_label -> "  email  ", '_help -> "")
+        @inputDate(personForm("date_joined"), '_label -> " date joined  ", '_help -> "")
+
+
+
+
+    </fieldset>
+
+    <div class="actions">
+        <input type="submit" value="Create a new Personr" class="btn primary"> or
+        <a href="@routes.Application.list()" class="btn">Cancel</a>
+    </div>
+
+    }
+}
+</body>
+</html>

@@ -1,5 +1,7 @@
 package models
 
+import java.util.Date
+
 import anorm.SqlParser._
 import anorm._
 import play.api.Play.current
@@ -8,7 +10,7 @@ import play.api.db._
 import scala.language.postfixOps
 
 
-case class Person(id: Option[Long] = None, first_name: String, last_name: String, website: String, email: String)
+case class Person(id: Option[Long] = None, first_name: String, last_name: String, website: String, email: String, is_active: Boolean, date_joined: Date)
 case class Project(id: Option[Long] = None, name: String, personId: Option[Long])
 
 case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
@@ -20,13 +22,16 @@ case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
 object Person {
 
 
+
   val simple = {
     get[Option[Long]]("person.id") ~
       get[String]("person.first_name") ~
       get[String]("person.last_name") ~
       get[String]("person.website") ~
-      get[String]("person.email") map {
-      case id~first_name~last_name~website~email => Person(id, first_name, last_name, website, email)
+      get[String]("person.email") ~
+      get[Boolean]("person.is_active") ~
+      get[Date]("person.date_joined") map {
+      case id~first_name~last_name~website~email~is_active~date_joined => Person(id, first_name, last_name, website, email, is_active, date_joined)
     }
   }
 
@@ -36,7 +41,27 @@ object Person {
       c.id.fold(cs) { id => cs :+ (id.toString -> c.first_name) }
     }
   }
-
+// metoda dodająca Person
+// withConnection - pobrana metoda z play.api.db
+  def insert(person: Person) = {
+  DB.withConnection { implicit connection =>
+    SQL(
+      """
+          insert into person values (
+            (select next value for person_seq),
+            {first_name}, {last_name}, {website}, {email}, {is_active}, {date_joined}
+          )
+      """
+    ).on(
+        'first_name -> person.first_name,
+        'last_name -> person.last_name,
+        'website -> person.website,
+        'email -> person.email,
+        'is_active -> person.is_active,
+        'date_joined -> person.date_joined
+      ).executeUpdate()
+  }
+  }
 }
 
 object Project {
@@ -48,6 +73,8 @@ object Project {
       case id ~ name ~ personId => Project(id, name, personId)
     }
   }
+
+
 
   val withPerson = Project.simple ~ (Person.simple ?) map {
     case project ~ person => (project, person)
@@ -63,7 +90,7 @@ object Project {
   /**
    * @param page Page to display
    * @param pageSize Number of computers per page
-   * @param orderBy Computer property used for sorting
+   * @param orderBy Project property used for sorting
    * @param filter Filter applied on the name column
    */
   def list(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Project, Option[Person])] = {
@@ -74,8 +101,8 @@ object Project {
 
       val projects = SQL(
         """
-          select * from project 
-          left join person on project.person_id = person.id
+          select * from project
+          right OUTER  JOIN  person on project.person_id = person.id
           where project.name like {filter}
           order by {orderBy} nulls last
           limit {pageSize} offset {offset}
