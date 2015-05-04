@@ -1,19 +1,19 @@
 package controllers
 
-
+import models.Person._
 import models._
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
 import views._
 
+
 object Application extends Controller {
 
   val projectForm = Form(
     mapping(
       "id" -> ignored(None:Option[Long]),
-      "name" -> nonEmptyText,
-      "person_id" -> optional(longNumber)
+      "name" -> nonEmptyText
     )(Project.apply)(Project.unapply)
   )
 // mapowanie klasy Person
@@ -25,7 +25,8 @@ object Application extends Controller {
       "website" -> text,
       "email" -> nonEmptyText,
       "is_active" -> boolean,
-      "date_joined" -> date
+      "date_joined" -> date,
+      "project_id" -> optional(longNumber)
     )(Person.apply)(Person.unapply)
   )
 
@@ -43,22 +44,21 @@ object Application extends Controller {
    */
   def list(page: Int, orderBy: Int, filter: String) = Action { implicit request =>
     Ok(html.list(
-      Project.list(page = page, orderBy = orderBy, filter = ("%"+filter+"%")),
-      orderBy, filter
+      Person.list(page = page, orderBy = orderBy, filter = ("%" + filter + "%")),
+       orderBy,  filter
     ))
   }
   // metoda do dodania Person
-  def create = Action {
-    // pobranie strony HTML
-     Ok(html.createForm(personForm,Person.options))
+  def create = Action {    // pobranie strony HTML
+     Ok(html.createForm(personForm,Project.options))
   }
  // metoda zapisu Person pobranych danych z personForm
   def save = Action { implicit request =>
     personForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.createForm(formWithErrors, Person.options)),
+      formWithErrors => BadRequest(html.createForm(formWithErrors, Project.options)),
       person => {
         // Pobranie metody insert
-        Person.insert(person)
+        insert(person)
         Home.flashing("success" -> "Person %s has been created" )
       }
     )

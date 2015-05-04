@@ -1,4 +1,4 @@
-@(currentPage: Page[(Project, Option[Person])], currentOrderBy: Int, currentFilter: String)(implicit flash: play.api.mvc.Flash)
+@(currentPage: Page[(Person, Option[Project])], currentOrderBy: Int, currentFilter: String)(implicit flash: play.api.mvc.Flash)
 
 @****************************************
 * Helper generating navigation links    *
@@ -20,7 +20,8 @@
 
 @main {
 
-    <h1>@Messages("projects.list.title", currentPage.total) </h1>
+    <h1>@currentPage.total  projects found</h1>
+
 
     @flash.get("success").map { message =>
     <div class="alert-message warning">
@@ -31,10 +32,10 @@
 
     <a class="btn success" id="add" href="@routes.Application.create()">Add a new Person</a>
 
+    <br/><br/><br/>
 
 
-
-    @Option(currentPage.items).filterNot(_.isEmpty).map { projects =>
+    @Option(currentPage.items).filterNot(_.isEmpty).map { persons =>
 
     <table class="projects zebra-striped">
         <thead>
@@ -46,19 +47,20 @@
         </thead>
         <tbody>
 
-        @projects.map {
-        case (project, person) => {
-        <tr>
-            <td>@project.name</td>
-            <td>
-                @person.map(_.first_name).getOrElse { <em>-</em> } @person.map(_.last_name).getOrElse { <em>-</em> }
-            </td>
+        @persons.map {
+            case (person, project) => {
+            <tr>
 
-            <td>
-                @person.map(_.email).getOrElse { <em>-</em> }
-            </td>
-        </tr>
-        }
+                <td>
+                    @project.map(_.name).getOrElse { <em>-</em> }
+                </td>
+                <td>@person.first_name
+                    @person.last_name</td>
+                <td>
+                    @person.email
+                </td>
+            </tr>
+            }
         }
 
         </tbody>

@@ -1,4 +1,4 @@
-@(personForm: Form[Person],  person: Seq[(String, String)])
+@(personForm: Form[Person], projects: Seq[(String, String)])
 
 @import helper._
 
@@ -26,13 +26,18 @@
         @inputText(personForm("email"), '_label -> "  email  ", '_help -> "")
         @inputDate(personForm("date_joined"), '_label -> " date joined  ", '_help -> "")
 
-
-
+        @select(
+            personForm("project_id"),
+            projects,
+            '_label -> "Project name",
+            '_default -> "-- Choose a Project --",
+            '_showConstraints -> false
+        )
 
     </fieldset>
 
     <div class="actions">
-        <input type="submit" value="Create a new Personr" class="btn primary"> or
+        <input type="submit" value="Create a new Person" class="btn primary"> or
         <a href="@routes.Application.list()" class="btn">Cancel</a>
     </div>
 

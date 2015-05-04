@@ -1,10 +1,31 @@
-New log file opened at Fri May 01 04:21:49 CEST 2015 by 9944@Kasia
-Taking next connection to: 54339
-New client attempting to connect on port: 54340-54339
-  Address = /192.168.0.107:54339
-This client on port 54340 has uuid 58c2b7fc-ad50-476a-ab17-8929cc3d5bce configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-58c2b7fc-ad50-476a-ab17-8929cc3d5bce
-Taking next connection to: 54339
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 54339
+New log file opened at Mon May 04 23:47:33 CEST 2015 by 10568@Kasia
+Taking next connection to: 57190
+New client attempting to connect on port: 57191-57190
+  Address = /192.168.0.107:57190
+This client on port 57191 has uuid bfa93c56-ec40-43da-81e5-7203058b5744 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-bfa93c56-ec40-43da-81e5-7203058b5744
+Taking next connection to: 57190
+New client attempting to connect on port: 57220-57190
+  Address = /192.168.0.107:57190
+Handshake exception on socket: 57220
+sbt.impl.ipc.HandshakeException: Unable to perform handshake
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
+	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
+	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+Caused by: java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at java.io.DataInputStream.readInt(Unknown Source)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 57190
+New client attempting to connect on port: 57221-57190
+  Address = /192.168.0.107:57190
+This client on port 57221 has uuid 8cad20a6-3ba3-4713-bc79-0b6e0928a209 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-8cad20a6-3ba3-4713-bc79-0b6e0928a209
+Taking next connection to: 57190
