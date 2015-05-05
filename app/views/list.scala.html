@@ -54,8 +54,12 @@ if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
         <td>
             @project.map(_.name).getOrElse { <em>-</em> }
         </td>
-        <td>@person.first_name
-            @person.last_name</td>
+        <td>
+            <a href="@routes.Application.editPerson(person.id.get)">
+                @person.first_name
+                @person.last_name
+            </a>
+        </td>
         <td>
             @person.email
         </td>

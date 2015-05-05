@@ -81,6 +81,35 @@ object Application extends Controller {
   }
 
 
+  /**
+   *
+   * @param id Id of the computer to edit
+   */
+  def editPerson(id: Long) = Action {
+    Person.findById(id).map { person =>
+      Ok(html.editForm(id, personForm.fill(person), Project.options))
+    }.getOrElse(NotFound)
+
+  }
+
+  /**
+   *
+   * @param id  Id Person edytowanej
+   */
+  def updatePerson(id: Long) = Action { implicit request =>
+    personForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(html.editForm(id, formWithErrors, Project.options)),
+      person => {
+        Person.updatePerson(id, person)
+        Home.flashing("success" -> "Person has been updated")
+      }
+    )
+  }
+
+
+
+
+
 }
 
 

@@ -109,7 +109,37 @@ object Person {
     }
   }
 
-
+  /**
+   *
+   * @param id ID Person
+   * @param person rekordy Person
+   */
+  def updatePerson(id: Long, person: Person) = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          update person
+            set first_name = {first_name},
+            last_name = {last_name},
+            website = {website},
+            email = {email},
+            is_active = {is_active},
+            date_joined = {date_joined},
+            project_id = {project_id}
+            where id = {id}
+        """
+      ).on(
+          'id -> id,
+          'first_name -> person.first_name,
+          'last_name -> person.last_name,
+          'website -> person.website,
+          'email -> person.email,
+          'is_active -> person.is_active,
+          'date_joined -> person.date_joined,
+          'project_id -> person.projectId
+        ).executeUpdate()
+    }
+  }
 
 
 }

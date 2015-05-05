@@ -5,6 +5,9 @@ GET     /persons                   controllers.Application.list(p:Int ?= 0, s:In
 GET     /persons/new               controllers.Application.createPerson
 POST    /persons                   controllers.Application.savePerson
 
+GET     /persons/:id               controllers.Application.editPerson(id:Long)
+POST    /persons/:id               controllers.Application.updatePerson(id:Long)
+
 GET     /projects/new              controllers.Application.createProject
 POST    /projects                  controllers.Application.saveProject
 
