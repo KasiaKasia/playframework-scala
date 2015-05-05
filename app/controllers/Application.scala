@@ -2,7 +2,6 @@ package controllers
 import models._
 import models.Person._
 import models.Project._
-
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
@@ -17,7 +16,7 @@ object Application extends Controller {
       "name" -> nonEmptyText
     )(Project.apply)(Project.unapply)
   )
-// mapowanie klasy Person
+
   val personForm = Form(
     mapping(
       "id" -> ignored(None:Option[Long]),
@@ -41,7 +40,7 @@ object Application extends Controller {
    * @param page Aktualny numer strony (numerowany od 0)
    * @param orderBy Sortowanie kolumny
    * @param filter Filter na kolumnie
-   *   implicit - z ang. domniemany, niejawny
+   *
    */
   def list(page: Int, orderBy: Int, filter: String) = Action { implicit request =>
     Ok(html.list(
@@ -49,24 +48,23 @@ object Application extends Controller {
        orderBy,  filter
     ))
   }
-  // metoda do dodania Person
-  def create = Action {    // pobranie strony HTML
-     Ok(html.createForm(personForm,Project.options))
+
+  def createPerson = Action {
+     Ok(html.createPersonForm(personForm,Project.options))
   }
-  def createProject = Action {  
+
+  def createProject = Action {
     Ok(html.createProjectForm(projectForm,Project.options))
   }
 
 
 
- // metoda zapisu Person pobranych danych z personForm
-  def save = Action { implicit request =>
+  def savePerson = Action { implicit request =>
     personForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.createForm(formWithErrors, Project.options)),
+      formWithErrors => BadRequest(html.createPersonForm(formWithErrors, Project.options)),
       person => {
-        // Pobranie metody insert
         insert(person)
-        Home.flashing("success" -> "Person %s has been created" )
+        Home.flashing("success" -> "Person has been created" )
       }
     )
   }
@@ -77,7 +75,7 @@ object Application extends Controller {
       formWithErrors => BadRequest(html.createProjectForm(formWithErrors, Project.options)),
       project => {
         insertProject(project)
-        Home.flashing("success" -> "Person %s has been created" )
+        Home.flashing("success" -> "Project has been created" )
       }
     )
   }

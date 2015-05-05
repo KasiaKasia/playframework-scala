@@ -2,8 +2,8 @@
 GET     /                          controllers.Application.index
 GET     /persons                   controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f ?= "")
 
-GET     /persons/new               controllers.Application.create
-POST    /persons                   controllers.Application.save
+GET     /persons/new               controllers.Application.createPerson
+POST    /persons                   controllers.Application.savePerson
 
 GET     /projects/new              controllers.Application.createProject
 POST    /projects                  controllers.Application.saveProject

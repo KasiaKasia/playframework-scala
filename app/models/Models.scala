@@ -44,12 +44,11 @@ object Person {
   }
 
   /**
-   * Return a page of (Person,Project).
    *
-   * @param page Page to display
-   * @param pageSize Number of people per page
-   * @param orderBy Person property used for sorting
-   * @param filter Filter applied on the name column
+   * @param page Wyświetlenie strony
+   * @param pageSize Liczba osob na stronie
+   * @param orderBy Sortowanie
+   * @param filter Filter
    */
   def list(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Person, Option[Project])] = {
 
@@ -89,8 +88,6 @@ object Person {
   }
 
 
-// metoda dodająca Person
-// withConnection - pobrana metoda z play.api.db
   def insert(person: Person) = {
   DB.withConnection { implicit connection =>
     SQL(
