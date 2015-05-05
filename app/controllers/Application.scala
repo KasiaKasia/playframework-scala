@@ -1,7 +1,8 @@
 package controllers
-
-import models.Person._
 import models._
+import models.Person._
+import models.Project._
+
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
@@ -52,6 +53,12 @@ object Application extends Controller {
   def create = Action {    // pobranie strony HTML
      Ok(html.createForm(personForm,Project.options))
   }
+  def createProject = Action {  
+    Ok(html.createProjectForm(projectForm,Project.options))
+  }
+
+
+
  // metoda zapisu Person pobranych danych z personForm
   def save = Action { implicit request =>
     personForm.bindFromRequest.fold(
@@ -64,5 +71,18 @@ object Application extends Controller {
     )
   }
 
+
+  def saveProject = Action { implicit request =>
+    projectForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(html.createProjectForm(formWithErrors, Project.options)),
+      project => {
+        insertProject(project)
+        Home.flashing("success" -> "Person %s has been created" )
+      }
+    )
+  }
+
+
 }
-            
+
+

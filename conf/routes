@@ -5,5 +5,8 @@ GET     /persons                   controllers.Application.list(p:Int ?= 0, s:In
 GET     /persons/new               controllers.Application.create
 POST    /persons                   controllers.Application.save
 
+GET     /projects/new              controllers.Application.createProject
+POST    /projects                  controllers.Application.saveProject
+
 GET     /assets/*file              controllers.Assets.at(path="/public", file)
 

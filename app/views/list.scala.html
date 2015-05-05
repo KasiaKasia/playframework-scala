@@ -4,10 +4,10 @@
 * Helper generating navigation links    *
 ****************************************@
 @link(newPage: Int, newOrderBy: Option[Int] = None) = @{
-    routes.Application.list(newPage, newOrderBy.map { orderBy =>
-        if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
-    }.getOrElse(currentOrderBy), currentFilter)
-    
+routes.Application.list(newPage, newOrderBy.map { orderBy =>
+if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
+}.getOrElse(currentOrderBy), currentFilter)
+
 }
 @**********************************
 * Helper generating table headers *
@@ -20,62 +20,60 @@
 
 @main {
 
-    <h1>@currentPage.total  projects found</h1>
+<h1>@currentPage.total  projects found</h1>
 
 
-    @flash.get("success").map { message =>
-    <div class="alert-message warning">
-        <strong>Done!</strong> @message
-    </div>
+@flash.get("success").map { message =>
+<div class="alert-message warning">
+    <strong>Done!</strong> @message
+</div>
 
-    }
-
-    <a class="btn success" id="add" href="@routes.Application.create()">Add a new Person</a>
-
-    <br/><br/><br/>
-
-
-    @Option(currentPage.items).filterNot(_.isEmpty).map { persons =>
-
-    <table class="projects zebra-striped">
-        <thead>
-        <tr>
-            @header(1, "project name")
-            @header(2, "person")
-            @header(3, "email")
-        </tr>
-        </thead>
-        <tbody>
-
-        @persons.map {
-            case (person, project) => {
-            <tr>
-
-                <td>
-                    @project.map(_.name).getOrElse { <em>-</em> }
-                </td>
-                <td>@person.first_name
-                    @person.last_name</td>
-                <td>
-                    @person.email
-                </td>
-            </tr>
-            }
-        }
-
-        </tbody>
-    </table>
-
-
-
-    }.getOrElse {
-
-    <div class="well">
-        <em>Nothing to display</em>
-    </div>
-
-    }
-        
 }
 
-            
+<a class="btn success" id="add" href="@routes.Application.create()">Add a new Person</a>
+<a class="btn success" id="addProject" href="@routes.Application.createProject()">Add a new Project</a>
+<br/><br/><br/>
+
+
+@Option(currentPage.items).filterNot(_.isEmpty).map { persons =>
+
+<table class="projects zebra-striped">
+    <thead>
+    <tr>
+        @header(1, "project name")
+        @header(2, "person")
+        @header(3, "email")
+    </tr>
+    </thead>
+    <tbody>
+
+    @persons.map {
+    case (person, project) => {
+    <tr>
+
+        <td>
+            @project.map(_.name).getOrElse { <em>-</em> }
+        </td>
+        <td>@person.first_name
+            @person.last_name</td>
+        <td>
+            @person.email
+        </td>
+    </tr>
+    }
+    }
+
+    </tbody>
+</table>
+
+
+
+}.getOrElse {
+
+<div class="well">
+    <em>Nothing to display</em>
+</div>
+
+}
+
+}

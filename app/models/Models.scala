@@ -20,7 +20,7 @@ case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
 object Person {
 
   val simple = {
-    get[Option[Long]]("person.id") ~
+      get[Option[Long]]("person.id") ~
       get[String]("person.first_name") ~
       get[String]("person.last_name") ~
       get[String]("person.website") ~
@@ -111,16 +111,36 @@ object Person {
       ).executeUpdate()
     }
   }
+
+
+
+
 }
 
 object Project {
 
   val simple = {
-    get[Option[Long]]("project.id") ~
-      get[String]("project.name")  map {
+      get[Option[Long]]("project.id") ~
+      get[String]("project.name") map {
       case id ~ name => Project(id, name)
     }
   }
+
+  def insertProject(project: Project) = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          insert into project values (
+            (select next value for project_seq),
+            {name}
+          )
+        """
+      ).on(
+          'name -> project.name
+        ).executeUpdate()
+    }
+  }
+
 
   def options: Seq[(String,String)] = DB.withConnection { implicit connection =>
     SQL("select * from project order by name").as(Project.simple *).
