@@ -14,25 +14,25 @@
     <h1>Edit Person </h1>
     @form(routes.Application.updatePerson(id)) {
 
-    <fieldset>
+        <fieldset>
 
-        @inputText(personForm("first_name"), '_label -> "first name", '_help -> "")
-        @inputText(personForm("last_name"), '_label -> "last name", '_help -> "")
-        @inputText(personForm("website"), '_label -> "website", '_help -> "")
-        @inputText(personForm("email"), '_label -> "email", '_help -> "")
-        @inputText(personForm("is_active"), '_label -> "is active", '_help -> "")
-        @inputDate(personForm("date_joined"), '_label -> "date joined", '_help -> "")
+            @inputText(personForm("first_name"), '_label -> "first name", '_help -> "")
+            @inputText(personForm("last_name"), '_label -> "last name", '_help -> "")
+            @inputText(personForm("website"), '_label -> "website", '_help -> "")
+            @inputText(personForm("email"), '_label -> "email", '_help -> "")
+            @inputText(personForm("is_active"), '_label -> "is active", '_help -> "")
+            @inputDate(personForm("date_joined"), '_label -> "date joined", '_help -> "")
 
 
-        @select(
-            personForm("project_id"),
-            projects,
-            '_label -> "Project name",
-            '_default -> "-- Choose a Project --",
-            '_showConstraints -> false
-        )
+            @select(
+                personForm("project_id"),
+                projects,
+                '_label -> "Project name",
+                '_default -> "-- Choose a Project --",
+                '_showConstraints -> false
+            )
 
-    </fieldset>
+        </fieldset>
 
     <div class="actions">
         <input type="submit" value="Save a person" class="btn primary"> or

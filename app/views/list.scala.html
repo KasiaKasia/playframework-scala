@@ -43,6 +43,7 @@ if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
         @header(2, "Project name")
         @header(3, "Person")
         @header(4, "Email")
+
     </tr>
     </thead>
     <tbody>
@@ -51,11 +52,12 @@ if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
         case (person, project) => {
         <tr>
             <td>
-                @for(rec <- project) {
+              @for(rec <- project) {
                     <a href="@routes.Application.editProject(rec.id.get)">
                         @project.map(_.name).getOrElse { <em>-</em> }
-                    </a>
-                }
+
+                   </a>
+               }
             </td>
             <td>
                 <a href="@routes.Application.editPerson(person.id.get)">

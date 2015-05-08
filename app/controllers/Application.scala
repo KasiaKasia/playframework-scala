@@ -30,7 +30,7 @@ object Application extends Controller {
       "email" -> nonEmptyText,
       "is_active" -> boolean,
       "date_joined" -> date,
-      "project_id" -> ignored(None:Option[Long])
+      "project_id" -> optional(longNumber)
     )(Person.apply)(Person.unapply)
   )
 
