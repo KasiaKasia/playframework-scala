@@ -8,7 +8,7 @@ import play.api.db._
 import scala.language.postfixOps
 
 
-case class Project(id: Option[Long] = None, name: String)
+case class Project(id: Option[Long] = None, name: String, version: BigDecimal)
 case class Person(id: Option[Long] = None, first_name: String, last_name: String, website: String, email: String, is_active: Boolean, date_joined: Date, projectId: Option[Long])
 
 case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
@@ -39,7 +39,9 @@ object Person {
 
   def findById(id: Long): Option[Person] = {
     DB.withConnection { implicit connection =>
-      SQL("select * from person where id = {id}").on('id -> id).as(Person.simple.singleOpt)
+      SQL("select * from person where id = {id}").on(
+        'id -> id
+      ).as(Person.simple.singleOpt)
     }
   }
 
@@ -146,28 +148,60 @@ object Person {
 
 object Project {
 
+
+
   val simple = {
       get[Option[Long]]("project.id") ~
-      get[String]("project.name") map {
-      case id ~ name => Project(id, name)
+      get[String]("project.name") ~
+      get[BigDecimal]("project.version")  map {
+      case id ~ name ~ version => Project(id, name,version)
     }
   }
 
+  def findByProject_id(id: Long): Option[Project] = {
+    DB.withConnection { implicit connection =>
+      SQL("select * from project where id = {id}").on(
+        'id -> id
+      ).as(Project.simple.singleOpt)
+    }
+  }
   def insertProject(project: Project) = {
     DB.withConnection { implicit connection =>
       SQL(
         """
           insert into project values (
             (select next value for project_seq),
-            {name}
+            {name}, {version}
           )
         """
       ).on(
-          'name -> project.name
+          'name -> project.name,
+          'version -> project.version
         ).executeUpdate()
     }
   }
 
+  /**
+   *
+   * @param id ID Project
+   * @param project rekordy Projects
+   */
+  def updateProject(id: Long, project: Project) = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          update project
+            set name = {name},
+            version = {version}
+            where id = {id}
+        """
+      ).on(
+          'id -> id,
+          'name -> project.name,
+          'version -> project.version
+        ).executeUpdate()
+    }
+  }
 
   def options: Seq[(String,String)] = DB.withConnection { implicit connection =>
     SQL("select * from project order by name").as(Project.simple *).

@@ -1,11 +1,14 @@
 package controllers
-import models._
-import models.Person._
+
 import models.Project._
+import models._
+import views._
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
-import views._
+
+
+import models.Person._
 
 
 object Application extends Controller {
@@ -13,7 +16,8 @@ object Application extends Controller {
   val projectForm = Form(
     mapping(
       "id" -> ignored(None:Option[Long]),
-      "name" -> nonEmptyText
+      "name" -> nonEmptyText,
+      "version" -> bigDecimal
     )(Project.apply)(Project.unapply)
   )
 
@@ -26,7 +30,7 @@ object Application extends Controller {
       "email" -> nonEmptyText,
       "is_active" -> boolean,
       "date_joined" -> date,
-      "project_id" -> optional(longNumber)
+      "project_id" -> ignored(None:Option[Long])
     )(Person.apply)(Person.unapply)
   )
 
@@ -83,7 +87,7 @@ object Application extends Controller {
 
   /**
    *
-   * @param id Id of the computer to edit
+   * @param id ID person
    */
   def editPerson(id: Long) = Action {
     Person.findById(id).map { person =>
@@ -106,6 +110,31 @@ object Application extends Controller {
     )
   }
 
+  /**
+   *
+   * @param id project_id Project
+   */
+  def editProject(id: Long) = Action {
+    Project.findByProject_id(id).map { project =>
+      Ok(html.editProjectForm(id, projectForm.fill(project), Project.options))
+    }.getOrElse(NotFound)
+
+  }
+
+
+  /**
+   *
+   * @param project_id  project_id Project
+   */
+  def updateProject(project_id: Long) = Action { implicit request =>
+    projectForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(html.editProjectForm(project_id,  formWithErrors, Project.options)),
+      project => {
+        Project.updateProject(project_id, project)
+        Home.flashing("success" -> "Project has been updated")
+      }
+    )
+  }
 
 
 

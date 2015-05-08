@@ -1,7 +1,0 @@
-New log file opened at Wed May 06 01:06:44 CEST 2015 by 10444@Kasia
-Taking next connection to: 56090
-New client attempting to connect on port: 56091-56090
-  Address = /192.168.0.107:56090
-This client on port 56091 has uuid 733cc723-1b4d-48dc-9b09-3d727695d45e configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-733cc723-1b4d-48dc-9b09-3d727695d45e
-Taking next connection to: 56090

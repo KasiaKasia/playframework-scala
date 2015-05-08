@@ -2,11 +2,11 @@
 
 # --- !Ups
 
-insert into project (id,name) values ( 1,'Play');
-insert into project (id,name) values ( 2,'Scala');
-insert into project (id,name) values ( 3,'Bootstrap');
-insert into project (id,name) values ( 4,'JavaScript');
-insert into project (id,name) values ( 5,'CSS');
+insert into project (id,name,version) values ( 1,'Play',1.5);
+insert into project (id,name,version) values ( 2,'Scala',1.4);
+insert into project (id,name,version) values ( 3,'Bootstrap',1.3);
+insert into project (id,name,version) values ( 4,'JavaScript',1.1);
+insert into project (id,name,version) values ( 5,'CSS',1.2);
 
 insert into person (id, first_name, last_name, website, email, is_active, date_joined, project_id) values ( 1,'Alicja','Kowalska', 'https://translate.google.pl/','kowalski@wp.pl', TRUE, '2014-12-01',1);
 insert into person (id, first_name, last_name, website, email, is_active, date_joined, project_id) values ( 2,'Jan','Nowak', 'http://forum.4programmers.net/','nowak@wp.pl', TRUE, '2014-12-01',2);

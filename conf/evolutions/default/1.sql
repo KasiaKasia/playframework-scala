@@ -7,6 +7,7 @@ set ignorecase true;
 create table project (
   id            bigint not null,
   name          varchar(255) not null,
+  version       decimal(10,4) not null,
   constraint pk_project primary key (id))
 ;
 

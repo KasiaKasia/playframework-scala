@@ -40,31 +40,36 @@ if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
 <table class="projects zebra-striped">
     <thead>
     <tr>
-        @header(1, "project name")
-        @header(2, "person")
-        @header(3, "email")
+        @header(2, "Project name")
+        @header(3, "Person")
+        @header(4, "Email")
     </tr>
     </thead>
     <tbody>
 
     @persons.map {
-    case (person, project) => {
-    <tr>
+        case (person, project) => {
+        <tr>
+            <td>
+                @for(rec <- project) {
+                    <a href="@routes.Application.editProject(rec.id.get)">
+                        @project.map(_.name).getOrElse { <em>-</em> }
+                    </a>
+                }
+            </td>
+            <td>
+                <a href="@routes.Application.editPerson(person.id.get)">
+                    @person.first_name
+                    @person.last_name
+                </a>
+            </td>
+            <td>
+                @person.email
+            </td>
 
-        <td>
-            @project.map(_.name).getOrElse { <em>-</em> }
-        </td>
-        <td>
-            <a href="@routes.Application.editPerson(person.id.get)">
-                @person.first_name
-                @person.last_name
-            </a>
-        </td>
-        <td>
-            @person.email
-        </td>
-    </tr>
-    }
+
+        </tr>
+        }
     }
 
     </tbody>

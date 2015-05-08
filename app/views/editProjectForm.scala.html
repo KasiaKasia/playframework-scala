@@ -1,0 +1,34 @@
+@(id: Long, projectForm: Form[Project], projects : Seq[(String, String)])
+
+@import helper._
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+@main {
+
+<h1>Edit Project </h1>
+        @form(routes.Application.updateProject(id)) {
+
+        <fieldset>
+
+            @inputText(projectForm("name"), '_label -> "Project name ", '_help -> "")
+            @inputText(projectForm("version"), '_label -> "Project version ", '_help -> "")
+
+
+        </fieldset>
+
+        <div class="actions">
+            <input type="submit" value="Save a project" class="btn primary"> or
+            <a href="@routes.Application.list()" class="btn">Cancel</a>
+        </div>
+
+    }
+
+}
+</body>
+</html>

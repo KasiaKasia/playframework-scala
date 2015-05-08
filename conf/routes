@@ -11,5 +11,8 @@ POST    /persons/:id               controllers.Application.updatePerson(id:Long)
 GET     /projects/new              controllers.Application.createProject
 POST    /projects                  controllers.Application.saveProject
 
+GET     /projects/:id      controllers.Application.editProject(id:Long)
+POST    /projects/:id      controllers.Application.updateProject(id:Long)
+
 GET     /assets/*file              controllers.Assets.at(path="/public", file)
 
