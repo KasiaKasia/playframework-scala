@@ -26,7 +26,8 @@ create table person (
 create sequence project_seq start with 1000;
 create sequence person_seq start with 1000;
 
-alter table person add constraint fk_person_project foreign key (project_id) references project(id) on delete restrict on update restrict;
+alter table person add constraint fk_person_project foreign key (project_id) references project(id)
+
 
 create index ix_person_project on person (project_id);
 

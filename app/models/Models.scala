@@ -143,7 +143,11 @@ object Person {
     }
   }
 
-
+  def deletePerson(id: Long) = {
+    DB.withConnection { implicit connection =>
+      SQL("delete from person where id = {id}").on('id -> id).executeUpdate()
+    }
+  }
 }
 
 object Project {
@@ -203,6 +207,11 @@ object Project {
     }
   }
 
+  def deleteProject(id: Long) = {
+    DB.withConnection { implicit connection =>
+      SQL("delete from project where id = {id}").on('id -> id).executeUpdate()
+    }
+  }
   def options: Seq[(String,String)] = DB.withConnection { implicit connection =>
     SQL("select * from project order by name").as(Project.simple *).
       foldLeft[Seq[(String, String)]](Nil) { (cs, c) =>

@@ -136,8 +136,15 @@ object Application extends Controller {
     )
   }
 
+  def deletePerson(id: Long) = Action {
+    Person.deletePerson(id)
+    Home.flashing("success" -> "Person has been deleted")
+  }
 
-
+  def deleteProject(id: Long) = Action {
+    Project.deleteProject(id)
+    Home.flashing("success" -> "Project has been deleted")
+  }
 
 }
 

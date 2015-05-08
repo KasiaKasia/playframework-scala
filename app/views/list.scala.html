@@ -43,7 +43,7 @@ if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
         @header(2, "Project name")
         @header(3, "Person")
         @header(4, "Email")
-
+        @header(5, "Options")
     </tr>
     </thead>
     <tbody>
@@ -66,25 +66,30 @@ if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
                 </a>
             </td>
             <td>
-                @person.email
+                    @person.email
             </td>
+            <td>
+
+                    <input type="submit" value="Delete person" class="btn danger">
+
+               </td>
 
 
-        </tr>
-        }
-    }
+           </tr>
+           }
+       }
 
-    </tbody>
-</table>
+       </tbody>
+   </table>
 
 
 
-}.getOrElse {
+   }.getOrElse {
 
-<div class="well">
-    <em>Nothing to display</em>
-</div>
+   <div class="well">
+       <em>Nothing to display</em>
+   </div>
 
-}
+   }
 
-}
+   }
