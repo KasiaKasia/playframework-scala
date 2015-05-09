@@ -148,11 +148,10 @@ object Person {
       SQL("delete from person where id = {id}").on('id -> id).executeUpdate()
     }
   }
+
 }
 
 object Project {
-
-
 
   val simple = {
       get[Option[Long]]("project.id") ~
@@ -169,6 +168,7 @@ object Project {
       ).as(Project.simple.singleOpt)
     }
   }
+
   def insertProject(project: Project) = {
     DB.withConnection { implicit connection =>
       SQL(
@@ -212,6 +212,7 @@ object Project {
       SQL("delete from project where id = {id}").on('id -> id).executeUpdate()
     }
   }
+
   def options: Seq[(String,String)] = DB.withConnection { implicit connection =>
     SQL("select * from project order by name").as(Project.simple *).
       foldLeft[Seq[(String, String)]](Nil) { (cs, c) =>
