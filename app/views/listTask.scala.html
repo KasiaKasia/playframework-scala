@@ -32,7 +32,8 @@ if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
         <thead>
             <tr>
                 @header(1, "Task name")
-                @header(2, "Project ")
+                @header(2, "Project name ")
+                @header(3, "Person  ")
             </tr>
         </thead>
         <tbody>
@@ -44,9 +45,14 @@ if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
                     @task.name
                 </td>
                 <td>
-                   b
+                    @project.map(_.name).getOrElse { <em>-</em> }
                 </td>
+                <td>
 
+                         @person.map(_.first_name).getOrElse { <em>-</em> }
+                         @person.map(_.last_name).getOrElse { <em>-</em> }
+
+                </td>
             </tr>
             }
         }

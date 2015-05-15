@@ -1,49 +1,7 @@
-New log file opened at Fri May 15 18:25:44 CEST 2015 by 15256@Kasia
-Taking next connection to: 60768
-New client attempting to connect on port: 60769-60768
-  Address = /192.168.0.107:60768
-This client on port 60769 has uuid 5d2e79e4-2eff-4dc0-a4d8-a0c181c9b5dc configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-5d2e79e4-2eff-4dc0-a4d8-a0c181c9b5dc
-Taking next connection to: 60768
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 60768
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 60768
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 60768
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 60768
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 60768
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 60768
-New client attempting to connect on port: 61062-60768
-  Address = /192.168.0.107:60768
-Handshake exception on socket: 61062
-sbt.impl.ipc.HandshakeException: Unable to perform handshake
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
-	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
-	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.net.SocketException: Software caused connection abort: recv failed
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.io.BufferedInputStream.fill(Unknown Source)
-	at java.io.BufferedInputStream.read(Unknown Source)
-	at java.io.DataInputStream.readInt(Unknown Source)
-	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
-	... 2 more
-Taking next connection to: 60768
-New client attempting to connect on port: 61063-60768
-  Address = /192.168.0.107:60768
-This client on port 61063 has uuid a432f6a9-313a-4235-ac5c-689e025272ee configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-a432f6a9-313a-4235-ac5c-689e025272ee
-Taking next connection to: 60768
+New log file opened at Fri May 15 18:55:32 CEST 2015 by 19268@Kasia
+Taking next connection to: 61323
+New client attempting to connect on port: 61324-61323
+  Address = /192.168.0.107:61323
+This client on port 61324 has uuid 81c6afd4-7a2a-4f0b-9b1a-9abe7c2ef061 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-81c6afd4-7a2a-4f0b-9b1a-9abe7c2ef061
+Taking next connection to: 61323
