@@ -64,7 +64,7 @@ object Application extends Controller {
     ))
   }
 
-  
+
   def listTask(page: Int, orderBy: Int, filter: String) = Action { implicit request =>
      Ok(html.listTask(
        Task.listTask(page = page, orderBy = orderBy, filter = ("%" + filter + "%")),

@@ -1,4 +1,4 @@
-@(currentPage: Page[(Task, Option[Project])], currentOrderBy: Int, currentFilter: String)(implicit flash: play.api.mvc.Flash)
+@(currentPage: Page[(Task, Option[Person], Option[Project] )], currentOrderBy: Int, currentFilter: String)(implicit flash: play.api.mvc.Flash)
 
 @****************************************
 * Helper generating navigation links    *
@@ -26,37 +26,41 @@ if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
 </head>
 <body>
 @main {
-@Option(currentPage.items).filterNot(_.isEmpty).map { persons =>
-<table class="projects zebra-striped">
-    <thead>
-        <tr>
-            @header(1, "Task name")
-            @header(3, "Person")
-        </tr>
-    </thead>
-    <tbody>
 
-    @tasks.map {
-    case (task, project) => {
-    <tr>
-        <td>
+    @Option(currentPage.items).filterNot(_.isEmpty).map { tasks =>
+    <table class="projects zebra-striped">
+        <thead>
+            <tr>
+                @header(1, "Task name")
+                @header(2, "Project ")
+            </tr>
+        </thead>
+        <tbody>
 
-            @task.name
+        @tasks.map {
+            case (task, person, project) => {
+            <tr>
+                <td>
+                    @task.name
+                </td>
+                <td>
+                   b
+                </td>
 
-        </td>
+            </tr>
+            }
+        }
 
-        <td>
-            @project.name
+        </tbody>
+    </table>
+    }.getOrElse {
 
-        </td>
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
 
-    </tr>
     }
-    }
 
-    </tbody>
-</table>
-}
 }
 </body>
 </html>

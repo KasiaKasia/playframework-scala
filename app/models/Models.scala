@@ -29,11 +29,12 @@ object Task {
   }
 
   val withTaskProjectPerson = Task.simple ~
-    (Project.simple ?)     map {
-    case task ~ project  => (task, project)
+    (Person.simple ?) ~
+    (Project.simple ?) map {
+    case task ~ person ~ project  => (task, person, project)
   }
 
-  def listTask(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Task, Option[Project])] = {
+  def listTask(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Task, Option[Person] , Option[Project])] = {
 
     val offest = pageSize * page
 
@@ -69,8 +70,10 @@ object Task {
       Page(tasks, page, offest, totalRowsTasks)
 
     }
-
   }
+
+
+
 }
 
 

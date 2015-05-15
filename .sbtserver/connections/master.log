@@ -1,13 +1,31 @@
-New log file opened at Fri May 15 15:48:36 CEST 2015 by 17008@Kasia
-Taking next connection to: 58096
-New client attempting to connect on port: 58097-58096
-  Address = /192.168.0.107:58096
-This client on port 58097 has uuid 9348f9e2-b645-43ef-bd49-8e003ee8fe84 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-9348f9e2-b645-43ef-bd49-8e003ee8fe84
-Taking next connection to: 58096
-New client attempting to connect on port: 58127-58096
-  Address = /192.168.0.107:58096
-Handshake exception on socket: 58127
+New log file opened at Fri May 15 18:25:44 CEST 2015 by 15256@Kasia
+Taking next connection to: 60768
+New client attempting to connect on port: 60769-60768
+  Address = /192.168.0.107:60768
+This client on port 60769 has uuid 5d2e79e4-2eff-4dc0-a4d8-a0c181c9b5dc configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-5d2e79e4-2eff-4dc0-a4d8-a0c181c9b5dc
+Taking next connection to: 60768
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 60768
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 60768
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 60768
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 60768
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 60768
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 60768
+New client attempting to connect on port: 61062-60768
+  Address = /192.168.0.107:60768
+Handshake exception on socket: 61062
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -23,9 +41,9 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 58096
-New client attempting to connect on port: 58128-58096
-  Address = /192.168.0.107:58096
-This client on port 58128 has uuid c50e3ceb-9778-4232-94ae-b59e6c613425 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-c50e3ceb-9778-4232-94ae-b59e6c613425
-Taking next connection to: 58096
+Taking next connection to: 60768
+New client attempting to connect on port: 61063-60768
+  Address = /192.168.0.107:60768
+This client on port 61063 has uuid a432f6a9-313a-4235-ac5c-689e025272ee configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-a432f6a9-313a-4235-ac5c-689e025272ee
+Taking next connection to: 60768
