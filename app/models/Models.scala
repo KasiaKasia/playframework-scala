@@ -10,10 +10,67 @@ import scala.language.postfixOps
 
 case class Project(id: Option[Long] = None, name: String, version: BigDecimal)
 case class Person(id: Option[Long] = None, first_name: String, last_name: String, website: String, email: String, is_active: Boolean, date_joined: Date, projectId: Option[Long])
+case class Task(id: Option[Long] = None, name: String, projectId: Option[Long], personId: Option[Long])
 
 case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
   lazy val prev = Option(page - 1).filter(_ >= 0)
   lazy val next = Option(page + 1).filter(_ => (offset + items.size) < total)
+}
+
+object Task {
+
+  val simple = {
+      get[Option[Long]]("task.id") ~
+      get[String]("task.name") ~
+      get[Option[Long]]("task.project_id") ~
+      get[Option[Long]]("task.person_id") map {
+      case id ~ name ~ projectId ~ personId => Task(id, name, projectId, personId)
+    }
+  }
+
+  val withTaskProjectPerson = Task.simple ~
+    (Project.simple ?)     map {
+    case task ~ project  => (task, project)
+  }
+
+  def listTask(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Task, Option[Project])] = {
+
+    val offest = pageSize * page
+
+    DB.withConnection { implicit connection =>
+
+      val tasks = SQL(
+        """
+          select * from task
+          left join project on task.project_id = project.id
+          left join person on task.person_id = person.id
+          where task.name like {filter}
+          order by {orderBy} nulls last
+          limit {pageSize} offset {offset}
+        """
+      ).on(
+          'pageSize -> pageSize,
+          'offset -> offest,
+          'filter -> filter,
+          'orderBy -> orderBy
+        ).as(Task.withTaskProjectPerson *)
+
+      val totalRowsTasks = SQL(
+        """
+          select count(*) from task
+          left join project on task.project_id = project.id
+          left join person on task.person_id = person.id
+          where task.name like {filter}
+        """
+      ).on(
+          'filter -> filter
+        ).as(scalar[Long].single)
+
+      Page(tasks, page, offest, totalRowsTasks)
+
+    }
+
+  }
 }
 
 

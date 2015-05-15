@@ -14,7 +14,15 @@ insert into person (id, first_name, last_name, website, email, is_active, date_j
 insert into person (id, first_name, last_name, website, email, is_active, date_joined, project_id) values ( 4,'Paulina','Kowalska','http://localhost:9000/','kowalska@pl.pl',TRUE, '2014-12-01',4);
 insert into person (id, first_name, last_name, website, email, is_active, date_joined) values (5,'Natalia','Kowalska','http://localhost:9000/','kowalska@pl.pl',TRUE, '2014-12-01');
 
+insert into task (id, name, project_id, person_id) values ( 1, 'task 1', 1, 1);
+insert into task (id, name, project_id, person_id) values ( 2, 'task 2', 1, 2);
+insert into task (id, name, project_id, person_id) values ( 3, 'task 1', 2, 3);
+insert into task (id, name, project_id, person_id) values ( 4, 'task 1', 3, 4);
+insert into task (id, name, project_id, person_id) values ( 5, 'task 1', 4, 5);
+
+
 # --- !Downs
 
 delete from person;
 delete from project;
+delete from task;

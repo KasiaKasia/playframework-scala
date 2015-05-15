@@ -2,6 +2,8 @@
 GET     /                          controllers.Application.index
 GET     /persons                   controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f ?= "")
 
+GET     /tasks                     controllers.Application.listTask(p:Int ?= 0, s:Int ?= 2, f ?= "")
+
 GET     /persons/new               controllers.Application.createPerson
 POST    /persons                   controllers.Application.savePerson
 
@@ -16,7 +18,7 @@ POST    /projects/:id              controllers.Application.updateProject(id:Long
 
 POST    /projects/:id/delete       controllers.Application.deleteProject(id:Long)
 
-GET    /persons/:id/delete        controllers.Application.deletePerson(id:Long)
+GET     /persons/:id/delete        controllers.Application.deletePerson(id:Long)
 
 GET     /assets/*file              controllers.Assets.at(path="/public", file)
 

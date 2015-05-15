@@ -34,6 +34,17 @@ object Application extends Controller {
     )(Person.apply)(Person.unapply)
   )
 
+  val taskForm = Form(
+    mapping(
+      "id" -> ignored(None:Option[Long]),
+      "name" -> nonEmptyText,
+      "project_id" -> optional(longNumber),
+      "person_id" ->optional(longNumber)
+    )(Task.apply)(Task.unapply)
+  )
+
+
+
   val Home = Redirect(routes.Application.list(0, 2, ""))
 
 
@@ -53,6 +64,15 @@ object Application extends Controller {
     ))
   }
 
+  
+  def listTask(page: Int, orderBy: Int, filter: String) = Action { implicit request =>
+     Ok(html.listTask(
+       Task.listTask(page = page, orderBy = orderBy, filter = ("%" + filter + "%")),
+       orderBy,  filter
+     ))
+  }
+
+
   def createPerson = Action {
      Ok(html.createPersonForm(personForm,Project.options))
   }
@@ -61,7 +81,11 @@ object Application extends Controller {
     Ok(html.createProjectForm(projectForm,Project.options))
   }
 
-
+  /*
+  def createTask = Action {
+      Ok(html.createTaskForm(taskForm,Project.options))
+  }
+  */
 
   def savePerson = Action { implicit request =>
     personForm.bindFromRequest.fold(

@@ -1,0 +1,62 @@
+@(currentPage: Page[(Task, Option[Project])], currentOrderBy: Int, currentFilter: String)(implicit flash: play.api.mvc.Flash)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage: Int, newOrderBy: Option[Int] = None) = @{
+routes.Application.list(newPage, newOrderBy.map { orderBy =>
+if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
+}.getOrElse(currentOrderBy), currentFilter)
+
+}
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(orderBy: Int, title: String) = {
+<th class="col@orderBy header @if(scala.math.abs(currentOrderBy) == orderBy) @{if(currentOrderBy < 0) "headerSortDown" else "headerSortUp"}">
+<a href="@link(0, Some(orderBy))">@title</a>
+</th>
+}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+@main {
+@Option(currentPage.items).filterNot(_.isEmpty).map { persons =>
+<table class="projects zebra-striped">
+    <thead>
+        <tr>
+            @header(1, "Task name")
+            @header(3, "Person")
+        </tr>
+    </thead>
+    <tbody>
+
+    @tasks.map {
+    case (task, project) => {
+    <tr>
+        <td>
+
+            @task.name
+
+        </td>
+
+        <td>
+            @project.name
+
+        </td>
+
+    </tr>
+    }
+    }
+
+    </tbody>
+</table>
+}
+}
+</body>
+</html>
