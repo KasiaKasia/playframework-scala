@@ -45,7 +45,11 @@ if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
                     @task.name
                 </td>
                 <td>
-                    @project.map(_.name).getOrElse { <em>-</em> }
+                   @for(rec <- project) {
+                        <a href="@routes.Application.editProject(rec.id.get)">
+                            @project.map(_.name).getOrElse { <em>-</em> }
+                        </a>
+                    }
                 </td>
                 <td>
 
